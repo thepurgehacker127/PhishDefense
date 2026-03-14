@@ -1,0 +1,8 @@
+**requirements.txt** (you’ll add more in Phase 2)
+```txt
+fastapi
+uvicorn[standard]
+python-dotenv
+jinja2
+SQLAlchemy
+pydantic
