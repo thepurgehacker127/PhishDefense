@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Campaign Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            color: #222;
+        }
+
+        .kpi {
+            display: inline-block;
+            padding: 1rem 1.5rem;
+            margin: 0.5rem;
+            background: #f5f7fb;
+            border-radius: 8px;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        h1,
+        h2 {
+            margin: 0.2rem 0 0.8rem 0;
+        }
+
+        small {
+            color: #666;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        td,
+        th {
+            border: 1px solid #ddd;
+            padding: 6px 10px;
+        }
+
+        th {
+            background: #fafafa;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Campaign: {{ data.campaign.name }}</h1>
+    <small>Status: {{ data.campaign.status }}</small>
+
+    <h2>Counts</h2>
+    <div class="grid">
+        {% for k,v in data.counts.items() %}
+        <div class="kpi"><strong>{{ k }}</strong><br />{{ v }}</div>
+        {% endfor %}
+    </div>
+
+    <h2>Rates</h2>
+    <div class="grid">
+        {% for k,v in data.rates.items() %}
+        <div class="kpi"><strong>{{ k }}</strong><br />{{ v }}%</div>
+        {% endfor %}
+    </div>
+
+    <h2>Timings (seconds)</h2>
+    <div class="grid">
+        {% for k,v in data.timings_seconds.items() %}
+        <div class="kpi"><strong>{{ k }}</strong><br />{{ v if v is not none else '—' }}</div>
+        {% endfor %}
+    </div>
+
+    <h2>Outcomes</h2>
+    <table>
+        <tr>
+            <th>Outcome</th>
+            <th>Count</th>
+        </tr>
+        {% for k,v in data.outcomes.items() %}
+        <tr>
+            <td>{{ k }}</td>
+            <td>{{ v }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p style="margin-top:1rem">
+        <a href="/admin/reports/campaign/{{ data.campaign.id }}/export.csv">Download CSV</a>
+    </p>
+</body>
+
+</html>
