@@ -1,8 +1,15 @@
-**requirements.txt** (you’ll add more in Phase 2)
-```txt
-fastapi
-uvicorn[standard]
-python-dotenv
-jinja2
-SQLAlchemy
-pydantic
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "FastAPI (uvicorn)",
+      "type": "python",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["app.main:app", "--reload", "--port", "8000"],
+      "jinja": true,
+      "envFile": "${workspaceFolder}/.env",
+      "console": "integratedTerminal"
+    }
+  ]
+}
